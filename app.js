@@ -52,9 +52,7 @@ window.addEventListener("load" , function () {
   }
 })
 
-function CreateTask(e) {
-  e.preventDefault();
-
+function CreateTask() {
   if (inputText.value === "") {
     alert("Please Enter Any Value");
   } else {
@@ -75,6 +73,12 @@ function CreateTask(e) {
     inputText.value = "";
     
   }
+}
+
+function SubmitFunction(e) {
+  e.preventDefault();
+
+  CreateTask();
 }
 
 function ClearAllList() {
@@ -123,7 +127,7 @@ function DeleteButtonStyle(object) {
 }
 
 function AddEventListenerFunc() {
-  todoCreateForm.addEventListener("submit", CreateTask);
+  todoCreateForm.addEventListener("submit", SubmitFunction);
   clearAllTodo.addEventListener("click", ClearAllList);
 }
 

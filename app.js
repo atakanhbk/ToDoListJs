@@ -5,14 +5,28 @@ let allSquare = document.createElement("div");
 
 function ObjectStyleControl() {
   blueButton.innerHTML = "Create Blue Button";
+  blueButton.style.margin = "5px";
+  blueButton.style.borderRadius = "5px";
+  blueButton.style.backgroundColor = "blue";
+  blueButton.style.color = "white";
+
   greenButton.innerHTML = "Create Green Button";
+  greenButton.style.margin = "5px";
+  greenButton.style.borderRadius = "5px";
+  greenButton.style.backgroundColor = "green";
+  greenButton.style.color = "white";
+
   redButton.innerHTML = "Create Red Button";
+  redButton.style.margin = "5px";
+  redButton.style.borderRadius = "5px";
+  redButton.style.backgroundColor = "red";
+  redButton.style.color = "white";
 
   allSquare.style.padding = "10px";
-  allSquare.className = "all-square"
+  allSquare.className = "all-square";
   allSquare.style.display = "flex";
   allSquare.style.flexWrap = "wrap";
- allSquare.style.gap = "7px";
+  allSquare.style.gap = "7px";
 }
 
 ObjectStyleControl();
@@ -55,11 +69,11 @@ blueButton.addEventListener("click", function () {
 });
 
 greenButton.addEventListener("click", function () {
-    CreateSquare("green");
+  CreateSquare("green");
 });
 
 redButton.addEventListener("click", function () {
-    CreateSquare("red");
+  CreateSquare("red");
 });
 
 document.body.appendChild(blueButton);

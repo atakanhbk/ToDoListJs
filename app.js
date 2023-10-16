@@ -21,6 +21,48 @@ function ObjectStyleControl() {
   clearAllTodo.type = "button";
 }
 
+window.addEventListener("load", function () {
+  GetLocalStorage();
+});
+function GetLocalStorage() {
+  
+  if (localStorage.getItem("0") != null) {
+    for (let i = 0; i < JSON.parse(localStorage.getItem("0")).length; i++) {
+      let deleteButton = document.createElement("button");
+      DeleteButtonStyle(deleteButton);
+      let toDoListCard = document.createElement("div");
+      let toDoListCardText = document.createElement("span");
+  
+      toDoListCardParent.appendChild(toDoListCard);
+  
+      const cardStyle = toDoListCard.style;
+      cardStyle.width = "100px";
+      cardStyle.height = "100px";
+      cardStyle.border = "2px solid black";
+      cardStyle.margin = "10px";
+      toDoListCard.innerHTML = `${JSON.parse(localStorage.getItem("0"))[i]}`;
+      cardStyle.color = "white";
+      cardStyle.display = "flex";
+      cardStyle.alignItems = "center";
+      cardStyle.justifyContent = "center";
+      cardStyle.backgroundColor = "white";
+      cardStyle.color = "black";
+      cardStyle.wordBreak = "break-word";
+      cardStyle.overflow = "hidden";
+      cardStyle.padding = "10px";
+      cardStyle.position = "relative";
+  
+      toDoListCard.appendChild(toDoListCardText);
+      toDoListCard.appendChild(deleteButton);
+      deleteButton.addEventListener("click", DeleteToDo);
+  
+      toDoListCardList.push(inputText.value);
+  
+      inputText.value = "";
+    }
+  }
+}
+
 function CreateTask(e) {
   e.preventDefault();
 
@@ -38,17 +80,21 @@ function CreateTask(e) {
     toDoListCard.appendChild(toDoListCardText);
     toDoListCard.appendChild(deleteButton);
     deleteButton.addEventListener("click", DeleteToDo);
-   
+
     toDoListCardList.push(inputText.value);
-    console.log(toDoListCardList);
+
     inputText.value = "";
   }
+
+  localStorage.setItem("0", JSON.stringify(toDoListCardList));
+  console.log(JSON.parse(localStorage.getItem("0")));
 }
 
 function ClearAllList() {
   while (toDoListCardParent.firstChild) {
     toDoListCardParent.removeChild(toDoListCardParent.lastChild);
     toDoListCardList = [];
+    localStorage.clear();
   }
 }
 
@@ -57,6 +103,8 @@ function DeleteToDo(e) {
   const indexOfList = toDoListCardList.indexOf(deleteButtonParent.textContent);
   toDoListCardList.splice(indexOfList, 1);
   deleteButtonParent.remove();
+  localStorage.setItem("0",JSON.stringify(toDoListCardList));
+  console.log(toDoListCardList);
 }
 
 function ToDoListCardStyle(card) {
@@ -86,13 +134,11 @@ function DeleteButtonStyle(object) {
   deleteButtonStyle.top = "0";
   deleteButtonStyle.right = "0";
   object.type = "button";
-  console.log("");
 }
 
 function AddEventListenerFunc() {
   todoCreateForm.addEventListener("submit", CreateTask);
   clearAllTodo.addEventListener("click", ClearAllList);
-
 }
 
 function AppendChildFunc() {
